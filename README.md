@@ -4,9 +4,10 @@ This is a simple Chrome extension to show tab usage information. It includes a p
 
 To install:
 
-*   Download the flot library, unzip, and add to root directory of the project: http://code.google.com/p/flot/
+*   Download the project: https://github.com/tylor/chrome-tab-stats/zipball/master
+*   Download the flot library, unzip, and add to root directory of project: http://code.google.com/p/flot/
 *   Open Chrome, click Window > Extensions
 *   Click '+' next to 'Developer mode'
 *   Click 'Load unpacked extension...'
 *   Select the extension folder
-*   You should now see the tab info icon on your browser
+*   You should now see the tab info icon on your browser!
