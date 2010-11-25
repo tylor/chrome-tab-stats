@@ -1,0 +1,51 @@
+<style>
+body {
+  width: 620px;
+  overflow-x:hidden;
+  cursor: default;
+  text-align: center;
+}
+.metrics {
+  font-size: 1em;
+  font-family: Helvetica, Arial, sans-serif;
+  display: inline;
+}
+.metric {
+  color: #888;
+}
+
+#graph {
+  clear: both;
+  width: 600px;
+  height: 300px;
+}
+</style>
+<script language="javascript" type="text/javascript" src="flot/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="flot/jquery.flot.js"></script>
+<script>
+/* Resources
+  - http://code.google.com/chrome/extensions/windows.html#method-getAll
+  - http://code.google.com/chrome/extensions/tabs.html#method-getAllInWindow
+  - http://code.google.com/chrome/extensions/background_pages.html
+  - http://people.iola.dk/olau/flot/examples/
+  - http://flot.googlecode.com/svn/trunk/API.txt
+*/
+$(document).ready(function() {
+  var currentTabs = 0;
+  chrome.windows.getAll(null, function (windows) {
+    for (i in windows) {
+      chrome.tabs.getAllInWindow(windows[i].id, function (tabs) {
+        currentTabs += tabs.length;
+        $('#total').html(currentTabs);
+      });
+    }
+  });
+  $('#opened').html(chrome.extension.getBackgroundPage().totalCreated);
+  $('#closed').html(chrome.extension.getBackgroundPage().totalClosed);
+  // Add current time to data.
+  d = (chrome.extension.getBackgroundPage().timedTabs).concat([[(new Date()).getTime(), chrome.extension.getBackgroundPage().totalCreated - chrome.extension.getBackgroundPage().totalClosed]]);
+  $.plot($("#graph"), [{data: d, lines: {show: true, steps: true}}], { xaxis: { mode: "time" }, yaxis: {tickDecimals: 0} });
+});
+</script>
+<div class="metrics">You currently have <span id="total" class="metric">0</span> tabs open, and have opened <span id="opened" class="metric">0</span> and closed <span id="closed" class="metric">0</span>.</div>
+<div id="graph"></div>

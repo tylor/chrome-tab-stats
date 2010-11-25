@@ -1,0 +1,13 @@
+{
+  "name": "Tab count",
+  "version": "1.0",
+  "description": "Counts number of browser tabs in current window.",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "popup": "popup.html"
+  },
+  "background_page": "background.html",
+  "permissions": [
+    "tabs"
+  ]
+}

@@ -1,0 +1,13 @@
+<script>
+var timedTabs = Array();
+var totalCreated = 1;
+var totalClosed = 0;
+chrome.tabs.onCreated.addListener(function(tab) {
+  totalCreated++;
+  timedTabs.push([(new Date()).getTime(), totalCreated - totalClosed]);
+});
+chrome.tabs.onRemoved.addListener(function(tab) {
+  totalClosed++;
+  timedTabs.push([(new Date()).getTime(), totalCreated - totalClosed]);
+});
+</script>
