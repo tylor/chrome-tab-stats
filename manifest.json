@@ -1,7 +1,7 @@
 {
-  "name": "Tab count",
+  "name": "Tab stats",
   "version": "1.0",
-  "description": "Counts number of browser tabs in current window.",
+  "description": "A simple tab statistics tracker for Chrome.",
   "browser_action": {
     "default_icon": "icon.png",
     "popup": "popup.html"
