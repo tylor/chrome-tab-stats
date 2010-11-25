@@ -11,3 +11,5 @@ To install:
 *   Click 'Load unpacked extension...'
 *   Select the extension folder
 *   You should now see the tab info icon on your browser!
+
+If you have problems with the extension or want to refresh, visit Window > Extensions and click the 'Reload' link for the extension.
