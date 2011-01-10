@@ -31,15 +31,7 @@ body {
   - http://flot.googlecode.com/svn/trunk/API.txt
 */
 $(document).ready(function() {
-  var currentTabs = 0;
-  chrome.windows.getAll(null, function (windows) {
-    for (i in windows) {
-      chrome.tabs.getAllInWindow(windows[i].id, function (tabs) {
-        currentTabs += tabs.length;
-        $('#total').html(currentTabs);
-      });
-    }
-  });
+  $('#total').html(chrome.extension.getBackgroundPage().totalCreated - chrome.extension.getBackgroundPage().totalClosed);
   $('#opened').html(chrome.extension.getBackgroundPage().totalCreated);
   $('#closed').html(chrome.extension.getBackgroundPage().totalClosed);
   // Add current time to data.

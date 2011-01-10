@@ -1,7 +1,18 @@
 <script>
 var timedTabs = Array();
-var totalCreated = 1;
+var totalCreated = 0;
 var totalClosed = 0;
+
+// Count currently open tabs when script starts.
+chrome.windows.getAll(null, function (windows) {
+  for (i in windows) {
+    chrome.tabs.getAllInWindow(windows[i].id, function (tabs) {
+      totalCreated += tabs.length;
+      timedTabs.push([(new Date()).getTime(), totalCreated - totalClosed]);
+    });
+  }
+});
+
 chrome.tabs.onCreated.addListener(function(tab) {
   totalCreated++;
   timedTabs.push([(new Date()).getTime(), totalCreated - totalClosed]);
