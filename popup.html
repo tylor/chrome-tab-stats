@@ -31,12 +31,15 @@ body {
   - http://flot.googlecode.com/svn/trunk/API.txt
 */
 $(document).ready(function() {
-  $('#total').html(chrome.extension.getBackgroundPage().totalCreated - chrome.extension.getBackgroundPage().totalClosed);
+  $('#total').html(chrome.extension.getBackgroundPage().totalCreated - chrome.extension.getBackgroundPage().totalRemoved);
   $('#opened').html(chrome.extension.getBackgroundPage().totalCreated);
-  $('#closed').html(chrome.extension.getBackgroundPage().totalClosed);
+  $('#closed').html(chrome.extension.getBackgroundPage().totalRemoved);
   // Add current time to data.
-  d = (chrome.extension.getBackgroundPage().timedTabs).concat([[(new Date()).getTime(), chrome.extension.getBackgroundPage().totalCreated - chrome.extension.getBackgroundPage().totalClosed]]);
-  $.plot($("#graph"), [{data: d, lines: {show: true, steps: true}}], { xaxis: { mode: "time" }, yaxis: {tickDecimals: 0} });
+  time = new Date()
+  currentTime = time.getTime() - (time.getTimezoneOffset() * 60 * 1000);
+  d = (chrome.extension.getBackgroundPage().timedTabs).concat([[currentTime, chrome.extension.getBackgroundPage().totalCreated - chrome.extension.getBackgroundPage().totalRemoved]]);
+  //d = chrome.extension.getBackgroundPage().timedTabs;
+  $.plot($("#graph"), [{data: d, lines: {show: true, steps: true}}], { xaxis: { mode: "time", twelveHourClock: true }, yaxis: {tickDecimals: 0} });
 });
 </script>
 <div class="metrics">You currently have <span id="total" class="metric">0</span> tabs open, and have opened <span id="opened" class="metric">0</span> and closed <span id="closed" class="metric">0</span>.</div>
