@@ -1,4 +1,3 @@
-<script>
 var timedTabs = Array();
 var totalCreated = 0;
 var totalRemoved = 0;
@@ -28,4 +27,3 @@ function getCurrentTime() {
   time = new Date()
   return time.getTime() - (time.getTimezoneOffset() * 60 * 1000);
 }
-</script>
